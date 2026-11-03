@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Balai Gakkum LH Jabalnusra – Penegakan Hukum Lingkungan Hidup Jawa, Bali &amp; Nusa Tenggara</title>
+<meta name="description" content="Profil Balai Penegakan Hukum Lingkungan Hidup (Gakkum LH) Kota Surabaya – wilayah kerja Jawa, Bali, dan Nusa Tenggara – serta peta sebaran dan status TPA di Jawa Timur.">
+<meta name="theme-color" content="#0d2b23">
+<script>document.documentElement.className+=' js'</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/leaflet.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="images/logo.svg" type="image/svg+xml">
+</head>
+<body>
+<!--
+  PETUNJUK EDIT
+  • Nama pejabat, kontak, dan angka kinerja ada di data/profil.js (satu tempat, dipakai otomatis oleh halaman).
+  • Data TPA ada di data/tpa.js. Foto per TPA: isi field "foto" dengan path gambar (default images/foto-tpa.png).
+-->
+<div id="bar"></div><div id="glow"></div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#beranda"><img src="images/logo.svg" alt="" width="40" height="40"><span><b>Balai Gakkum LH</b><small>Jawa · Bali · Nusa Tenggara</small></span></a>
+  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
+  <nav id="menu">
+    <a href="#tentang">Tentang</a><a href="#mandat">Mandat</a><a href="#struktur">Struktur</a>
+    <a href="#layanan">Layanan</a><a href="#tpa">Isu TPA</a><a href="#peta">Peta TPA</a><a href="#kontak">Kontak</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="beranda">
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <div class="wrap hero-in">
+    <p class="eyebrow"><span>Kementerian Lingkungan Hidup / BPLH</span><i>·</i><span>Deputi Bidang Penegakan Hukum LH</span></p>
+    <h1 data-depth="14"><span>Negara hadir</span> <span>saat lingkungan</span> <span>dirusak.</span></h1>
+    <p class="lead">Balai Penegakan Hukum Lingkungan Hidup Kota Surabaya – unit pelaksana teknis KLH/BPLH untuk wilayah Jawa, Bali, dan Nusa Tenggara. Kami menangani pengaduan, mengawasi ketaatan, menjatuhkan sanksi, dan menyidik kejahatan lingkungan.</p>
+    <div class="cta"><a class="btn" href="#peta">Buka Peta Sebaran TPA</a><a class="btn ghost" href="#tentang">Kenali Balai</a></div>
+    <div class="hstats" id="hstats"></div>
+  </div>
+  <div class="stamp" aria-hidden="true"><svg viewBox="0 0 200 200"><defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs><circle cx="100" cy="100" r="96" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="100" cy="100" r="62" fill="none" stroke="currentColor" stroke-width="1.5"/><text font-size="15" letter-spacing="3" font-weight="700"><textPath href="#circ">DALAM PENGAWASAN · BALAI GAKKUM LH JABALNUSRA · </textPath></text><text x="100" y="94" text-anchor="middle" font-size="12" letter-spacing="2" font-weight="700">UU 32/2009</text><text x="100" y="114" text-anchor="middle" font-size="12" letter-spacing="2" font-weight="700">UU 18/2008</text></svg></div>
+  <a class="cue" href="#tentang" aria-label="Gulir ke bawah"><i></i></a>
+</section>
+
+<div class="tape" aria-hidden="true"><div>
+  <span>GARIS PENGAWAS LINGKUNGAN HIDUP</span><span>DILARANG MELINTAS</span><span>BALAI GAKKUM LH JABALNUSRA</span><span>GARIS PENGAWAS LINGKUNGAN HIDUP</span><span>DILARANG MELINTAS</span><span>BALAI GAKKUM LH JABALNUSRA</span>
+  <span>GARIS PENGAWAS LINGKUNGAN HIDUP</span><span>DILARANG MELINTAS</span><span>BALAI GAKKUM LH JABALNUSRA</span><span>GARIS PENGAWAS LINGKUNGAN HIDUP</span><span>DILARANG MELINTAS</span><span>BALAI GAKKUM LH JABALNUSRA</span>
+</div></div>
+
+<section id="tentang">
+  <div class="wrap two">
+    <div class="rv rl sticky"><p class="num">BERKAS 01</p><h2>Tentang Balai</h2>
+      <p class="sub">UPT penegakan hukum lingkungan hidup yang berada di bawah dan bertanggung jawab kepada Deputi Bidang Penegakan Hukum LH.</p>
+      <ul class="facts" id="facts"></ul>
+    </div>
+    <div class="rv rr">
+      <p>Balai Penegakan Hukum Lingkungan Hidup (Balai Gakkum LH) Kota Surabaya dibentuk melalui Peraturan Menteri Lingkungan Hidup/Kepala BPLH Nomor 10 Tahun 2025 tentang Organisasi dan Tata Kerja Balai Penegakan Hukum Lingkungan Hidup, yang ditetapkan pada 20 Agustus 2025. Balai ini merupakan satu dari lima Balai Gakkum LH di Indonesia – bersama Jambi, Makassar, Banjarmasin, dan Sorong – dan mengemban wilayah kerja terluas secara demografis: seluruh provinsi di Pulau Jawa, Bali, dan Nusa Tenggara.</p>
+      <p>Secara kelembagaan, Balai meneruskan mandat penegakan hukum lingkungan hidup yang sebelumnya dijalankan Balai Pengamanan dan Penegakan Hukum LHK (BPPHLHK) Wilayah Jawa, Bali, dan Nusa Tenggara yang berkedudukan di Sidoarjo–Surabaya sejak 2016. Setelah Kementerian Lingkungan Hidup dan Kehutanan dipisah menjadi dua kementerian, fungsi penegakan hukum <em>lingkungan hidup</em> – pencemaran, kerusakan lingkungan, limbah B3, pengelolaan sampah, dan kebakaran lahan – kini dijalankan oleh Balai Gakkum LH di bawah KLH/BPLH, sedangkan fungsi kehutanan dijalankan balai tersendiri di Kementerian Kehutanan.</p>
+      <p>Balai melayani masyarakat, pemerintah daerah, dan pelaku usaha di sembilan provinsi: Banten, DKI Jakarta, Jawa Barat, Jawa Tengah, DI Yogyakarta, Jawa Timur, Bali, Nusa Tenggara Barat, dan Nusa Tenggara Timur. Di wilayah inilah tekanan terhadap daya dukung lingkungan paling tinggi – kawasan industri terpadat, sungai-sungai tercemar, dan ratusan TPA yang masih beroperasi secara <em>open dumping</em>.</p>
+      <ol class="timeline" id="timeline">
+        <li><b>2016</b><span>Permen LHK P.15/2016 membentuk 5 Balai Pengamanan dan Penegakan Hukum LHK; wilayah Jabalnusra berkantor di Sidoarjo, Jawa Timur.</span></li>
+        <li><b>2022</b><span>Permen LHK 13/2022 menata ulang organisasi Balai: Subbagian TU, Seksi Wilayah I Jakarta, II Surabaya, III Kupang.</span></li>
+        <li><b>2024</b><span>KLHK dipisah; lahir Kementerian Lingkungan Hidup/Badan Pengendalian Lingkungan Hidup dengan Deputi Bidang Penegakan Hukum LH.</span></li>
+        <li><b>2025</b><span>Permen LH/BPLH 10/2025 (20 Agustus) menetapkan Balai Gakkum LH Kota Surabaya untuk Jawa, Bali, dan Nusa Tenggara.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="mandat" class="alt">
+  <div class="wrap">
+    <p class="num rv">BERKAS 02</p><h2 class="rv">Mandat: Tugas &amp; Fungsi</h2>
+    <p class="sub rv">Pasal 4 Permen LH/BPLH Nomor 10 Tahun 2025. Tugas Balai adalah <b>melaksanakan kegiatan penurunan gangguan, ancaman, dan pelanggaran hukum lingkungan hidup</b>, yang diselenggarakan melalui dua belas fungsi berikut.</p>
+    <div class="fungsi rv" id="fungsi"></div>
+  </div>
+</section>
+
+<section id="struktur">
+  <div class="wrap">
+    <p class="num rv">BERKAS 03</p><h2 class="rv">Struktur Organisasi</h2>
+    <p class="sub rv">Susunan organisasi menurut Pasal 5 Permen LH/BPLH 10/2025: Kepala Balai membawahi Subbagian Tata Usaha, dua Seksi Wilayah, serta kelompok jabatan fungsional dan pelaksana. Seksi Wilayah dibantu Pos Gakkum LH yang bersifat nonstruktural.</p>
+    <div class="org" id="org"></div>
+    <div class="wilayah rv" id="wilayah"></div>
+  </div>
+</section>
+
+<section id="layanan" class="alt">
+  <div class="wrap">
+    <div class="head-row">
+      <div><p class="num rv">BERKAS 04</p><h2 class="rv">Instrumen Penegakan Hukum</h2></div>
+      <div class="arrows"><button id="prev" aria-label="Sebelumnya">←</button><button id="next" aria-label="Berikutnya">→</button></div>
+    </div>
+  </div>
+  <div class="hscroll" id="hs"></div>
+  <div class="wrap"><div class="hp"><i id="hpi"></i></div><p class="note">Geser ke samping atau tarik dengan mouse. Instrumen bertingkat: dari pencegahan hingga pidana, sesuai UU 32/2009 tentang Perlindungan dan Pengelolaan Lingkungan Hidup.</p></div>
+</section>
+
+<section id="tpa" class="dark">
+  <div class="wrap two">
+    <div class="rv rl"><p class="num">BERKAS 05</p><h2>Isu Prioritas: TPA <em>Open Dumping</em></h2>
+      <p class="sub">Mengapa TPA menjadi fokus pengawasan Balai di Jawa Timur.</p></div>
+    <div class="rv rr">
+      <p>Undang-Undang Nomor 18 Tahun 2008 tentang Pengelolaan Sampah melarang pembuangan terbuka (<em>open dumping</em>) di tempat pemrosesan akhir. Lebih dari satu dekade kemudian, praktik itu masih berlangsung di ratusan TPA milik pemerintah daerah, memicu pencemaran air lindi, emisi gas metana, kebakaran, dan longsoran timbunan sampah.</p>
+      <p>Sejak awal 2025 Kementerian Lingkungan Hidup menjadikan penertiban TPA <em>open dumping</em> sebagai agenda nasional: teguran kepada ratusan kepala daerah, sanksi administratif paksaan pemerintah, penyegelan, hingga penyidikan pidana terhadap pengelola TPA yang lalai. Jawa Timur, dengan timbulan sampah lebih dari 12 ribu ton per hari, menjadi salah satu prioritas percepatan.</p>
+      <div class="kpis" id="kpis"></div>
+      <p class="note">Angka bersumber dari pernyataan resmi KLH/BPLH dan pemberitaan 2025–2026 (daftar sumber di bagian bawah halaman). Angka dapat berubah seiring kemajuan penertiban.</p>
+    </div>
+  </div>
+</section>
+
+<section id="peta">
+  <div class="wrap">
+    <p class="num rv">BERKAS 06</p><h2 class="rv">Peta Sebaran TPA Jawa Timur</h2>
+    <p class="sub rv">Gulir roda mouse untuk memperbesar, seret untuk menggeser. Klik penanda atau nama TPA untuk membuka berkas ringkasnya. Warna penanda menunjukkan sistem pengelolaan yang terdata.</p>
+    <div class="stats rv" id="stats"></div>
+    <div class="mapbox rv">
+      <aside id="list" aria-label="Daftar TPA">
+        <div class="list-head"><h4>Daftar TPA</h4><input id="q" type="search" placeholder="Cari TPA / kab/kota…" aria-label="Cari TPA"></div>
+        <div id="list-items"></div>
+      </aside>
+      <div id="map" role="application" aria-label="Peta sebaran TPA"></div>
+    </div>
+    <div class="legend rv" id="legend"></div>
+    <p class="note">Batas administrasi: Lapak GIS (2024), disederhanakan untuk web. Titik TPA: hasil pengukuran lapangan tim Balai (koordinat rata-rata jika lebih dari satu titik). Atribut TPA: dihimpun dari dokumen pemerintah daerah dan pemberitaan; verifikasi lapangan tetap menjadi acuan resmi.</p>
+  </div>
+</section>
+
+<section id="kontak" class="alt">
+  <div class="wrap two">
+    <div class="rv rl"><p class="num">BERKAS 07</p><h2>Kontak &amp; Pengaduan</h2>
+      <p class="sub">Laporkan dugaan pencemaran atau perusakan lingkungan. Setiap pengaduan diverifikasi sebelum ditindaklanjuti.</p></div>
+    <div class="rv rr kontak" id="kontak-isi"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div><img src="images/logo.svg" alt="" width="44" height="44"><b>Balai Penegakan Hukum Lingkungan Hidup Kota Surabaya</b><br>Wilayah Kerja Jawa, Bali, dan Nusa Tenggara · Kementerian Lingkungan Hidup/BPLH<br><small>© <span id="yr"></span> Balai Gakkum LH Jabalnusra. Dibuat untuk kepentingan informasi publik.</small></div>
+    <details class="sumber"><summary>Sumber rujukan</summary><ol id="sumber"></ol></details>
+  </div>
+</footer>
+
+<script src="js/leaflet.js"></script>
+<script src="js/three.min.js"></script>
+<script src="data/profil.js"></script>
+<script src="data/kab_jatim.js"></script>
+<script src="data/tpa.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
